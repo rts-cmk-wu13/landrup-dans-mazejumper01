@@ -50,7 +50,7 @@ export async function loginUser(prevState, formData) {
     console.log(data)
 
     cookieStore.set("accessToken", data.token)
-    cookieStore.set("username", data.name)
+    cookieStore.set("userId", data.userId)
 
     return redirect("/kalender")
 

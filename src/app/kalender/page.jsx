@@ -1,17 +1,54 @@
+import Image from "next/image";
+import { cookies } from "next/headers";
+import { getUserById } from "@/lib/dal";
+import ActivityCard from "@/components/userComponents/currentActivityCard"; // Client Component
 
-export default function Page () {
+export default async function Page() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+  const userId = cookieStore.get("userId")?.value;
 
+  if (!token || !userId) return <p>Du er ikke logget ind</p>;
 
-    
+  let user;
+  try {
+    user = await getUserById(userId, token);
 
-    return (
-        <main>
-            <h1>Dette er en super hemmelig side</h1>
-            <p>Der er meget hemmelig information:</p>
-        
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo dolor doloribus error earum autem placeat tempore animi molestias quas, corporis beatae possimus, odit maiores suscipit asperiores minus blanditiis illo perferendis at iusto, facilis nostrum. Obcaecati quia quo magni amet ducimus temporibus eaque, voluptatibus vel minus dolores modi, mollitia possimus eligendi! Error quam laborum odit optio laboriosam fugit eos corporis quae quos sed corrupti natus ullam explicabo expedita ab minima, fugiat dignissimos rerum ad ipsa praesentium recusandae. Eius nostrum ab esse ratione, atque nisi rerum neque? Quis ut cupiditate impedit repellendus doloribus, incidunt atque consequatur eligendi eum optio eveniet voluptates pariatur accusamus enim fugiat blanditiis nobis culpa consequuntur iure quos debitis ullam facere sapiente et. Minima amet provident quasi reiciendis asperiores veniam doloribus? Nulla eligendi quis in quidem ut veniam consequuntur perferendis sequi assumenda eos adipisci sapiente eaque ipsa maiores est reiciendis, hic atque accusantium, error totam, iste ipsam! Fuga eligendi cumque provident officia, amet praesentium. Cumque corporis nemo temporibus dolores? Accusantium, consequuntur sint ipsam voluptas distinctio, repudiandae sunt quia, quod enim nihil eius numquam quisquam vitae modi officia sapiente unde praesentium nostrum sed. Debitis eius beatae ut pariatur voluptatem exercitationem quae vel. Nulla eum repellendus sunt dignissimos! Illum sint distinctio quidem enim dolorum? Adipisci, animi ut accusamus beatae asperiores inventore maxime, unde, assumenda maiores velit numquam? Saepe, nisi consectetur! Eos non rerum maxime temporibus libero itaque voluptates eveniet rem? Reiciendis libero soluta quibusdam saepe tempore! Ullam nihil qui ea, in, explicabo neque repellat minima earum sed, maiores odit praesentium nam laudantium tenetur! Culpa modi ipsa, ut in, odit nobis eveniet blanditiis repellat beatae cum voluptatum voluptas? Repudiandae, eaque fuga! Nihil eos ad autem. Facere molestias qui modi nemo architecto, deleniti natus explicabo quaerat at pariatur sunt aperiam doloremque corporis officiis illo non repellendus suscipit voluptatem commodi quasi ipsam aliquid necessitatibus! Voluptas distinctio facilis amet placeat nulla assumenda delectus, aspernatur porro iusto odio quaerat vero harum quos nobis repellat, culpa quae laboriosam alias? Optio vero quisquam doloribus laudantium esse reprehenderit ullam consectetur! Consectetur, aliquam quia repudiandae est itaque deleniti minus ipsa temporibus ea quo. Aut delectus, dolores iure optio dolorum saepe natus, facilis ad molestias mollitia enim beatae quisquam similique? Ea necessitatibus rem commodi labore quod laborum? Laborum nisi natus animi vitae quia est esse vero, minima nobis reiciendis, enim nostrum neque quos! Tenetur temporibus ullam at earum corrupti impedit totam repellat ipsum? Impedit corrupti eveniet dolores ratione magni! Nisi repellat facere id, eligendi atque cumque unde incidunt? Quia, sunt repellendus excepturi iste, rerum vitae deleniti quas animi amet totam mollitia sit, praesentium repudiandae sed veniam unde adipisci hic architecto. Repudiandae reprehenderit, incidunt quisquam sed dolores dignissimos. Tempora, iusto quae! Nam consectetur eligendi ducimus necessitatibus veniam nisi, minima harum iure rem impedit. Odit quam harum, mollitia ut aspernatur delectus, tenetur voluptas quia in laudantium saepe officia asperiores unde voluptatem officiis esse, impedit rem id labore nihil sapiente. Voluptates unde in cupiditate vel dolore similique assumenda quam dicta reprehenderit molestias eaque dolorem doloremque, minus vitae debitis ad voluptate harum inventore quia voluptatibus.
-            </p>
-        </main>
-    )
+    // 🔹 Debug: se brugerdata i terminalen
+    console.log("Brugerdata:", user);
+
+    // 🔹 Debug: se aktiviteter array
+    const activities = user.activities || [];
+    console.log("Aktiviteter array:", activities);
+    console.log("Antal hold:", activities.length);
+
+  } catch (err) {
+    console.error("Fejl ved hentning af bruger:", err);
+    return <p>Kunne ikke hente bruger</p>;
+  }
+
+  const activities = user.activities || [];
+
+  return (
+    <main className="p-4">
+      <h1>Min profil</h1>
+      <div className="bg-white text-3xl text-black flex flex-col gap-4 justify-center items-center p-4 rounded shadow">
+        <Image src="/assets/user.svg" width={64} height={64} alt="Bruger ikon" />
+        <p>Navn: {user.firstname} {user.lastname}</p>
+        <p>Rank: {user.role}</p>
+      </div>
+
+      <section className="mt-8">
+        <h2 className="text-2xl mb-4">Tilmeldte hold</h2>
+        {activities.length === 0 && <p>Du er ikke tilmeldt nogen hold.</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {activities.map(activity => (
+            <ActivityCard key={activity.id} activity={activity} />
+          ))}
+        </div>
+      </section>
+
+     
+    </main>
+  );
 }
