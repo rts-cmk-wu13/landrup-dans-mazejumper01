@@ -1,6 +1,6 @@
 "use client";
 
-export default function activityCard({ activity }) {
+export default function CurrentActivityCard({ activity }) {
   return (
     <div className="bg-white text-black opacity-80 p-4 rounded shadow flex flex-col justify-between">
       <h3 className="font-bold text-lg">{activity.name}</h3>

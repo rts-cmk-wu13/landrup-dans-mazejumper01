@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cookies } from "next/headers";
 import { getUserById } from "@/lib/dal";
-import ActivityCard from "@/components/userComponents/currentActivityCard"; // Client Component
+import CurrentActivityCard from "@/components/userComponents/currentActivityCard";
 
 export default async function Page() {
   const cookieStore = await cookies();
@@ -14,10 +14,10 @@ export default async function Page() {
   try {
     user = await getUserById(userId, token);
 
-    // 🔹 Debug: se brugerdata i terminalen
+
     console.log("Brugerdata:", user);
 
-    // 🔹 Debug: se aktiviteter array
+
     const activities = user.activities || [];
     console.log("Aktiviteter array:", activities);
     console.log("Antal hold:", activities.length);
@@ -43,7 +43,7 @@ export default async function Page() {
         {activities.length === 0 && <p>Du er ikke tilmeldt nogen hold.</p>}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {activities.map(activity => (
-            <ActivityCard key={activity.id} activity={activity} />
+            <CurrentActivityCard key={activity.id} activity={activity} />
           ))}
         </div>
       </section>

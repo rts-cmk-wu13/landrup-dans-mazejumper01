@@ -30,7 +30,7 @@ export default function Home() {
                 src="/assets/boernedans.jpg"
                 width={1000}
                 height={62}
-                alt="Landrup Dans Logo"
+                alt="Børn der danser"
                     />
 
             <p>På børneholdene leger vi os ind i dansens verden gennem musik, bevægelse og fantasi. Undervisningen styrker motorik, rytme og kropsbevidsthed i trygge rammer. Fokus er på danseglæde, fællesskab og aktiv bevægelse, hvor alle kan være med.</p>
@@ -43,7 +43,7 @@ export default function Home() {
                 src="/assets/seniordans.jpg"
                 width={1000}
                 height={62}
-                alt="Landrup Dans Logo"
+                alt="Ældre mennesker der danser"
                     />
 
             <p>Selskabs- og seniordans kombinerer hyggeligt samvær med skånsom motion. Vi danser klassiske pardanse i et tempo, hvor alle kan følge med. Undervisningen styrker balance, koordination og kondition, samtidig med at fællesskabet og danseglæden er i centrum.</p>
@@ -56,7 +56,7 @@ export default function Home() {
                 src="/assets/modernedans.jpg"
                 width={1000}
                 height={62}
-                alt="Landrup Dans Logo"
+                alt="Folk som danser moderne dans og ballet"
                     />
 
             <p>Moderne dans og ballet forener teknik, kropskontrol og musikalsk udtryk. Træningen forbedrer styrke, smidighed og holdning gennem varierede øvelser. Undervisningen foregår i en positiv atmosfære, hvor bevægelsesglæde og koncentration skaber både fordybelse og effektiv motion.</p>
@@ -69,7 +69,7 @@ export default function Home() {
                 src="/assets/streethiphop.jpg"
                 width={1000}
                 height={62}
-                alt="Landrup Dans Logo"
+                alt="folk som danser hip-hop"
                     />
 
             <p>Streetdance og hiphop er energifyldt træning med fokus på rytme, attitude og fællesskab. Vi arbejder med grooves, koreografier og grundtrin, der styrker kondition og koordination. Stemningen er uformel og motiverende, så motion og danseglæde går hånd i hånd.</p>
