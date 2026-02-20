@@ -10,12 +10,12 @@ export default async function Page() {
     return (
    <main className="px-4">
   <section className="flex justify-center">
-    {/* Midterkolonne */}
+
     <div>
 
       <h1 className="text-3xl font-bold mb-6">Aktiviteter</h1>
 
-      {/* Cards grid */}
+
         
         {activities.map((activity) => (
           <ActivityCard activity={activity} key={activity.id} />

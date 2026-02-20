@@ -33,7 +33,7 @@
 
 
 .holdtyper {
-  @apply w-89 flex flex-col gap-3
+  @apply w-89 flex flex-col gap-3 py-5
 }
 
 .holdtyper h3{

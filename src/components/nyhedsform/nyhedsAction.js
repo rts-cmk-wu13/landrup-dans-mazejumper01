@@ -5,7 +5,7 @@ import { z } from "zod"
 const newsletterSchema = z.object({
     email: z
         .string()
-        .min(1, "Email er påkrævet")
+        .min(3, "Email er påkrævet")
         .email("Ugyldig email adresse")
 })
 

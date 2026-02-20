@@ -29,6 +29,16 @@ export async function getAllActivities() {
     return data;
 }
 
+export async function getActivityById(id) {
+    const response = await fetch(`http://localhost:4000/api/v1/activities/${id}`);
+    if(!response.ok){
+        throw new Error({message: "Posts could not be fetched"})
+    }
+    const data = await response.json();
+    
+    return data;
+}
+
 
 export async function getUserById(id, token) {
   const response = await fetch(`http://localhost:4000/api/v1/users/${id}`, {

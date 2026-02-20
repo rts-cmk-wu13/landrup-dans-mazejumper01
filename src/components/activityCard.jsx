@@ -7,8 +7,8 @@ export default function ActivityCard({ activity }) {
 <>
 <div className="pb-5">
   <Link
-    href={`/aktivitet/${activity.name}`}
-    aria-labelledby={"activity-card-" + activity.name}
+    href={`/aktiviteter/${activity.id}`}
+    aria-labelledby={"activity-card-" + activity.id}
     className="block"
   >
     <div
@@ -19,7 +19,7 @@ export default function ActivityCard({ activity }) {
     >
       <div className="bg-gray-800 rounded-tr-3xl opacity-90 flex flex-col justify-end p-4 text-white">
         <h2
-          id={"activity-card-" + activity.id}
+          name={"activity-card-" + activity.name}
           className="text-xl font-semibold"
         >
           {activity.name}
