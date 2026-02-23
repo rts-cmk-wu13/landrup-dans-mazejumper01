@@ -1,30 +1,54 @@
-import { getActivityById } from "@/lib/dal";
+"use server";
 
+import { getActivityById, joinActivity, leaveActivity } from "@/lib/dal"
+import { cookies } from "next/headers"
 
+export default async function AktiviteterDetailPage({ params }) {
+  const { id } = await params
+  const activity = await getActivityById(id)
 
-export default async function AktiviteterDetailPage ( {params} ) {
+  const cookieStore = await cookies()
+  const userId = cookieStore.get("userId")?.value
+  const isJoined = activity.users?.some(u => u.id === Number(userId))
 
-    const { id } = await params
+  async function handleJoin() {
+    "use server"
+    await joinActivity(id)
+  }
 
-    const activity = await getActivityById(id)
+  async function handleLeave() {
+    "use server"
+    await leaveActivity(id)
+  }
 
-    console.log(activity);
-    
-    return (
-        <main>
-            <div
-            className="flex flex-col-reverse w-90 h-85  bg-cover bg-center"
-            style={{
-                backgroundImage: `url(${activity.asset?.url || "/placeholder.jpg"})`,
-            }}
-            >
-                <button>Tildmeld</button>
-            </div>
-            <h1 className="text-3xl  my-6">{ activity.name }</h1>
-            <p>{activity.minAge}+år</p>
+  return (
+    <main className="grid gap-6">
+      <div
+        className="grid grid-cols-[10px_1fr_10px] max-w-100% h-120.5 items-end justify-items-end bg-cover bg-center"
+        style={{ backgroundImage: `url(${activity.asset?.url || "/placeholder.jpg"})` }}
+      >
+        {isJoined ? (
+          <form action={handleLeave} className="col-start-2 mb-7">
+            <button className="bg-[#003147] w-60 h-13.25 rounded text-white">
+              Afmeld
+            </button>
+          </form>
+        ) : (
+          <form action={handleJoin} className="col-start-2 mb-7">
+            <button className="bg-[#003147] w-60 h-13.25 rounded text-white">
+              Tilmeld
+            </button>
+          </form>
+        )}
+      </div>
 
-            <p>{activity.description}</p>
-        </main>
-    )
-
+      <div className="grid grid-cols-[10px_1fr_10px]">
+        <div className="col-start-2">
+          <h1 className="text-3xl">{activity.name}</h1>
+          <p>{activity.minAge}+ år</p>
+          <p>{activity.description}</p>
+        </div>
+      </div>
+    </main>
+  )
 }

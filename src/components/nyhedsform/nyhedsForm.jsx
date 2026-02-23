@@ -39,7 +39,7 @@ export default function NyhedsForm() {
 
             {state.errors?.email && <p>{state.errors.email}</p>}
             {state.errors?.form && <p>{state.errors.form}</p>}
-            {state.success && <p className="text-green-600">{state.success}</p>}
+            {state.success && <p>{state.success}</p>}
 
 
         </form>
