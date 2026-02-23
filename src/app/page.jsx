@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/components/logo";
 import NyhedsForm from "@/components/nyhedsform/nyhedsForm";
+import Slider from "@/components/slider";
+import KontaktForm from "@/components/kontaktform/kontaktForm"
 
 
 export default function Home() {
@@ -86,8 +88,10 @@ export default function Home() {
        <NyhedsForm />
        </div>
       </section>
-      
 
+      <Slider />
+      
+      <KontaktForm />
     </main>
   );
 }

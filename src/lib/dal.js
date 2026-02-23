@@ -90,6 +90,12 @@ export async function joinActivity(activityId) {
   return response.json()
 }
 
+export async function getTestimonials() {
+  const response = await fetch("http://localhost:4000/api/v1/testimonials")
+  if (!response.ok) throw new Error("Kunne ikke hente testimonials")
+  return response.json()
+}
+
 
 //Til at fjerne en bruger fra aktivitet
 export async function leaveActivity(activityId) {
@@ -112,4 +118,5 @@ export async function leaveActivity(activityId) {
   revalidatePath(`/aktiviteter/${activityId}`)
   return { success: true }
 }
+
 

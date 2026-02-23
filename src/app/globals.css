@@ -40,6 +40,10 @@
   @apply   text-2xl
 }
 
+.arrow {
+  @apply w-10.75 h-10.75 border-white border rounded-full flex items-center justify-center cursor-pointer  text-2xl font-bold
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
