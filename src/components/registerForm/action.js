@@ -53,6 +53,6 @@ export async function registerUser(prevState, formData) {
         }
     }
 
-    // Redirect til login-side
+  
     return redirect("/login")
 }
