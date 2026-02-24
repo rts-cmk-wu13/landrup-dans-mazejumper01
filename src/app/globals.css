@@ -45,7 +45,7 @@
 }
 
 .navelm {
-  @apply text-xs text-gray-500 list-none flex flex-col items-center gap-0.5
+  @apply text-xs  list-none flex flex-col items-center gap-0.5
 }
 
 body {

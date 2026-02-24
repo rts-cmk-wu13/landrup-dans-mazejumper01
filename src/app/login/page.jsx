@@ -1,5 +1,6 @@
 import LoginForm from "@/components/loginform/loginForm.jsx";
 import Logo from "@/components/logo";
+import Link from "next/link";
 
 export default function Login() {
     return (
@@ -14,7 +15,7 @@ export default function Login() {
                 <LoginForm/>
             </div>
            
-
+            <p className="w-screen text-center">er du endu ikke bruger? <Link className="underline" href="/register">opret dig her</Link></p>
 
         </main>
 

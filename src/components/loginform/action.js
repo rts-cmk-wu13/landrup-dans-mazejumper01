@@ -16,7 +16,7 @@ export async function loginUser(prevState, formData) {
     
 
     if (username === prevState.values.username && password === prevState.values.password) {
-        return prevState // no change
+        return prevState 
     }
 
     const result = loginSchema.safeParse({username, password})
@@ -45,7 +45,7 @@ export async function loginUser(prevState, formData) {
         }
     }
 
-    //console.log(response)
+
     const data = await response.json()
     console.log(data)
 

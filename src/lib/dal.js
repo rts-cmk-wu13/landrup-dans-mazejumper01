@@ -56,7 +56,7 @@ export async function getUserById(id, token) {
     cache: "no-store"
   });
 
-   console.log("Status:", response.status);
+
 
 
   if (!response.ok) {
@@ -75,6 +75,44 @@ export async function joinActivity(activityId) {
 
   if (!token || !userId) return redirect("/login")
 
+  
+  const userResponse = await fetch(
+    `http://localhost:4000/api/v1/users/${userId}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store"
+    }
+  )
+
+  if (!userResponse.ok) throw new Error("Kunne ikke hente bruger")
+
+  const user = await userResponse.json()
+
+  
+  const activityResponse = await fetch(
+    `http://localhost:4000/api/v1/activities/${activityId}`,
+    { cache: "no-store" }
+  )
+
+  if (!activityResponse.ok) throw new Error("Kunne ikke hente aktivitet")
+
+  const activity = await activityResponse.json()
+
+  //Tjekker alder
+  if (user.age < activity.minAge) {
+    throw new Error("Du opfylder ikke alderskravet")
+  }
+
+  //Tjekker om bruger allerede har en aktivitet samme ugedag
+  const hasSameWeekday = user.activities?.some(
+    (a) => a.weekday.toLowerCase() === activity.weekday.toLowerCase()
+  )
+
+  if (hasSameWeekday) {
+    throw new Error("Du er allerede tilmeldt en aktivitet på denne ugedag")
+  }
+
+
   const response = await fetch(
     `http://localhost:4000/api/v1/users/${userId}/activities/${activityId}`,
     {
@@ -90,6 +128,8 @@ export async function joinActivity(activityId) {
   return response.json()
 }
 
+
+//Henter reviews fra api
 export async function getTestimonials() {
   const response = await fetch("http://localhost:4000/api/v1/testimonials")
   if (!response.ok) throw new Error("Kunne ikke hente testimonials")

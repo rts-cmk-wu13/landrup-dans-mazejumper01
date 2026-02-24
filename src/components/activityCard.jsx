@@ -5,11 +5,11 @@ import Link from "next/link";
 export default function ActivityCard({ activity }) {
   return (
 <>
-<div className="pb-5">
+<div className="flex max-w-90">
   <Link
     href={`/aktiviteter/${activity.id}`}
     aria-labelledby={"activity-card-" + activity.id}
-    className="block"
+    className="flex max-w-90"
   >
     <div
       className="flex flex-col-reverse w-90 h-85 rounded-t-3xl rounded-bl-3xl overflow-hidden bg-cover bg-center"

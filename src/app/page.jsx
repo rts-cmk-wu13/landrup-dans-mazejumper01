@@ -4,16 +4,30 @@ import Logo from "@/components/logo";
 import NyhedsForm from "@/components/nyhedsform/nyhedsForm";
 import Slider from "@/components/slider";
 import KontaktForm from "@/components/kontaktform/kontaktForm"
+import { logoutUser } from "@/lib/logout";
+import { cookies } from "next/headers";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const cookieStore = await cookies()
+  const isLoggedIn = cookieStore.has("accessToken")
+
+
   return (
     <main>
      <section className="relative min-h-212 w-full bg-[url('/assets/heroimg.jpg')] bg-cover bg-center flex flex-col justify-between items-center">
         <Logo />
-        <Link href="/login">
-          <button className='btn'>Log ind her</button>
-        </Link>
+         {isLoggedIn ? (
+          <form action={logoutUser}>
+            <button className='btn'>Log ud</button>
+          </form>
+        ) : (
+          <Link href="/login">
+            <button className='btn'>Log ind her</button>
+          </Link>
+        )}
+
      </section>
 
       
@@ -92,6 +106,20 @@ export default function Home() {
       <Slider />
       
       <KontaktForm />
+
+      <footer className="flex flex-col items-center gap-4 my-10">
+
+        <Image 
+          src="/assets/landrup.svg"
+          width={64}
+          height={64}
+          alt="Landrup Dans logo"
+                    />
+
+        <h2 className="text-2xl">Landrup Dans</h2>
+        <p>Pulsen 8. 4000 Roskilde</p>
+        <p>Tlf. 3540 4550</p>
+      </footer>
     </main>
   );
 }

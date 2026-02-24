@@ -23,7 +23,7 @@ export default function KontaktForm() {
         defaultValue={state.values.name}
         className="inpt"
       />
-      {state.errors?.name && <p className="text-red-600">{state.errors.name}</p>}
+      {state.errors?.name && <p >{state.errors.name}</p>}
 
       <input
         type="email"
@@ -32,7 +32,7 @@ export default function KontaktForm() {
         defaultValue={state.values.email}
         className="inpt"
       />
-      {state.errors?.email && <p className="text-red-600">{state.errors.email}</p>}
+      {state.errors?.email && <p >{state.errors.email}</p>}
 
       <textarea
         name="message"
@@ -40,10 +40,10 @@ export default function KontaktForm() {
         defaultValue={state.values.message}
         className="text-black bg-gray-200 w-full h-28.5"
       />
-      {state.errors?.message && <p className="text-red-600">{state.errors.message}</p>}
+      {state.errors?.message && <p >{state.errors.message}</p>}
 
-      {state.errors?.form && <p className="text-red-600">{state.errors.form}</p>}
-      {state.success && <p className="text-green-600">{state.success}</p>}
+      {state.errors?.form && <p >{state.errors.form}</p>}
+      {state.success && <p>{state.success}</p>}
 
       <button
         type="submit"

@@ -27,6 +27,8 @@ export default function LoginForm() {
                 <input className=" inpt" type="password" name="password" placeholder="Adgangskode" defaultValue={state.values.password} />
                 { state.errors?.password && <p>{state.errors.password}</p> }
             </div>
+
+            
             { state.errors?.form && <p>{state.errors.form}</p>}
             <button type="submit" disabled={isPending} className="btn self-center disabled:opacity-50">{ isPending ? "Logger ind..." : "Log ind"}</button>
         </form>
