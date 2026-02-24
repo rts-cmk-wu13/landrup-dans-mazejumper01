@@ -2,6 +2,7 @@
 
 import { getActivityById, joinActivity, leaveActivity } from "@/lib/dal"
 import { cookies } from "next/headers"
+import FooterNav from "@/components/footerNav";
 
 export default async function AktiviteterDetailPage({ params }) {
   const { id } = await params
@@ -22,6 +23,7 @@ export default async function AktiviteterDetailPage({ params }) {
   }
 
   return (
+    <>
     <main className="grid gap-6">
       <div
         className="grid grid-cols-[10px_1fr_10px] max-w-100% h-120.5 items-end justify-items-end bg-cover bg-center"
@@ -50,5 +52,8 @@ export default async function AktiviteterDetailPage({ params }) {
         </div>
       </div>
     </main>
+
+    <FooterNav />
+    </>
   )
 }

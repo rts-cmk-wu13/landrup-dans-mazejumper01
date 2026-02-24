@@ -44,6 +44,10 @@
   @apply w-10.75 h-10.75 border-white border rounded-full flex items-center justify-center cursor-pointer  text-2xl font-bold
 }
 
+.navelm {
+  @apply text-xs text-gray-500 list-none flex flex-col items-center gap-0.5
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
